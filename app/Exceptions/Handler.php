@@ -2,8 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Packages\Base\HttpStatus;
+use App\Packages\Base\Response\ValidationErrorResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -26,6 +30,17 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
+
+    protected function convertValidationExceptionToResponse(ValidationException $validationException, $request)
+    {
+        if($validationException->response) {
+            return $validationException->response;
+        }
+        return response()->json(
+            (new ValidationErrorResponse($validationException))->createResponse(true, 'falha ao validar request', $validationException->getCode()),
+            HttpStatus::BAD_REQUEST
+        );
+    }
 
     /**
      * Register the exception handling callbacks for the application.
