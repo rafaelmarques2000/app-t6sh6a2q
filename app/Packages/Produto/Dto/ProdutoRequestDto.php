@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 class ProdutoRequestDto
 {
     private string $sku;
-
     private string $nome;
-
     private int $quantidadeInicial;
 
     private function __construct(string $sku, string $nome, int $quantidadeInicial)
