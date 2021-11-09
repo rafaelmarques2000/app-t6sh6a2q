@@ -25,12 +25,16 @@ class HistoricoMovimento
     /** @ORM\Column(type="string") */
     private string $operacao;
 
-    public function __construct(string $sku, string $quantidade, string $operacao, \DateTime $dataMovimentacao)
+    /** @ORM\ManyToOne(targetEntity="Produto", inversedBy="historicoMovimento") */
+    private Produto $produto;
+
+    public function __construct(string $sku, string $quantidade, \DateTime $dataMovimentacao, string $operacao, Produto $produto)
     {
         $this->sku = $sku;
         $this->quantidade = $quantidade;
         $this->dataMovimentacao = $dataMovimentacao;
         $this->operacao = $operacao;
+        $this->produto = $produto;
     }
 
     public function getSku(): string
@@ -51,5 +55,10 @@ class HistoricoMovimento
     public function getOperacao(): string
     {
         return $this->operacao;
+    }
+
+    public function getProduto(): Produto
+    {
+        return $this->produto;
     }
 }

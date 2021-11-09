@@ -41,4 +41,11 @@ class ProdutoFacade
         $this->produtoRepository->update($produto);
         return $produto;
     }
+
+    public function baixarProdutoNoEstoque(Produto $produto, ProdutoEstoqueRequestDto $produtoEstoqueRequestDto): Produto
+    {
+        $produto->baixarProdutoEstoque($produtoEstoqueRequestDto->getQuantidade());
+        $this->produtoRepository->update($produto);
+        return $produto;
+    }
 }

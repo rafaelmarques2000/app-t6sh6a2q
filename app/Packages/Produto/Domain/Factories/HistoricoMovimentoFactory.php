@@ -9,13 +9,14 @@ use Carbon\Carbon;
 
 class HistoricoMovimentoFactory
 {
-    public static function create(string $sku, int $quantidade, string $operacao): HistoricoMovimento
+    public static function create(string $sku, int $quantidade, string $operacao, Produto $produto): HistoricoMovimento
     {
         return new HistoricoMovimento(
             $sku,
             $quantidade,
+            Carbon::now(),
             $operacao,
-            Carbon::now()
+            $produto
         );
     }
 }

@@ -56,7 +56,8 @@ class Produto
         $historicoMovimento = HistoricoMovimentoFactory::create(
             $this->getSku(),
             $quantidade,
-            HistoricoMovimento::OPERACAO_ENTRADA
+            HistoricoMovimento::OPERACAO_ENTRADA,
+            $this
         );
         $this->adicionarMovimentoHistorico($historicoMovimento);
     }
@@ -64,13 +65,19 @@ class Produto
     public function baixarProdutoEstoque(int $quantidade)
     {
         if ($this->quantidadeInicial <= self::SEM_PRODUTOS_DISPONIVEIS) {
-            throw new \Exception('Este produto não está disponivel', 1636495698);
+            throw new \Exception('Este produto não está disponivel ou não possui estoque', 1636495698);
         }
+
+        if($this->quantidadeInicial < $quantidade) {
+            throw new \Exception('Não há produtos suficientes para retirada', 1636498091);
+        }
+
         $this->quantidadeInicial -= $quantidade;
         $historicoMovimento = HistoricoMovimentoFactory::create(
             $this->getSku(),
             $quantidade,
-            HistoricoMovimento::OPERACAO_SAIDA
+            HistoricoMovimento::OPERACAO_SAIDA,
+            $this
         );
         $this->adicionarMovimentoHistorico($historicoMovimento);
     }

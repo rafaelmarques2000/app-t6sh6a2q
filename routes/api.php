@@ -15,7 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('produtos', ProdutoController::class);
+Route::resource('produtos', ProdutoController::class)->except(['edit','update','create','destroy']);
+Route::prefix('produtos')->group(function () {
 
-Route::put('produtos/{produto}/estoque/entrada', [ProdutoController::class,'entrarProdutoNoEstoque']);
-Route::put('produtos/{produto}/estoque/saida', [ProdutoController::class,'baixarProdutoNoEstoque']);
+    Route::put('{produto}/estoque/entrada', [ProdutoController::class, 'adicionarProdutoNoEstoque']);
+    Route::put('{produto}/estoque/saida', [ProdutoController::class, 'baixarProdutoNoEstoque']);
+    Route::get('{produto}/estoque/historico-movimento', [ProdutoController::class, 'obterHistoricoDeMovimentoDoProduto']);
+
+});
+
