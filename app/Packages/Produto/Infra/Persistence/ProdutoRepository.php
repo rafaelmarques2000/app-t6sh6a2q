@@ -17,9 +17,9 @@ class ProdutoRepository extends Repository implements ProdutoRepositoryInterface
         return collect($this->findAll());
     }
 
-    public function getBySku(string $sku): ?Produto
+    public function getById(string $id): ?Produto
     {
-        return $this->find($sku);
+        return $this->find($id);
     }
 
     public function create(Produto $produto): Produto
@@ -32,13 +32,6 @@ class ProdutoRepository extends Repository implements ProdutoRepositoryInterface
     public function update(Produto $produto): Produto
     {
         $this->dbUpdate($produto);
-        EntityManager::flush();
-        return $produto;
-    }
-
-    public function delete(Produto $produto): Produto
-    {
-        $this->delete($produto);
         EntityManager::flush();
         return $produto;
     }

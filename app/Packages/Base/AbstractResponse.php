@@ -10,11 +10,10 @@ abstract class AbstractResponse
     public function createResponse(bool $error, ?string $message = null, ?int $errorCode = null): array
     {
         $response = ['error' => $error];
+        $response['message'] = $message;
         if ($error) {
-            $response['message'] = $message;
             $response['errorCode'] = $errorCode;
         }
-
         $response['data'] = $this->getResponseData();
         return $response;
     }

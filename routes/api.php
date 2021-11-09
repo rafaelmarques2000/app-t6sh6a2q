@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('produtos', ProdutoController::class)->parameters([
-    'produtos'
-]);
+Route::resource('produtos', ProdutoController::class);
+
+Route::put('produtos/{produto}/estoque/entrada', [ProdutoController::class,'entrarProdutoNoEstoque']);
+Route::put('produtos/{produto}/estoque/saida', [ProdutoController::class,'baixarProdutoNoEstoque']);
