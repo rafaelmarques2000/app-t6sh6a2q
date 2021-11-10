@@ -35,7 +35,7 @@ Estrutura do projeto baseada em DDD e Arquiteture Hexagonal
 
 #### Base de codigo
 toda a codificação se encontra dentro de App/Packages onde temos a seguinte estrutura
-- Base - Todo codigo comum que será compartilhado interfaces entre utils entre outros
+- Base - Todo codigo comum que será compartilhado interfaces,utils entre outros
 - Doctrine - Implementações para o ORM doctrine2
 - Produto - pacote onde se encontra as regras de negocio para produto
 
