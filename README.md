@@ -16,6 +16,7 @@ Tecnologias Utilizadas
 - Laravel 8.6
 - PhpUnit 9.5 
 - Postgres 12
+- ORM Doctrine V1.7
 - Docker 20.10.7
 - Docker Compose 20.10.7
 
@@ -32,8 +33,14 @@ Metodologia de desenvolvimento: TDD(Test Driven Development)
 
 Estrutura do projeto baseada em DDD e Arquiteture Hexagonal
 
+#### Base de codigo
+toda a codificação se encontra dentro de App/Packages onde temos a seguinte estrutura
+- Base - Todo codigo comum que será compartilhado interfaces entre utils entre outros
+- Doctrine - Implementações para o ORM doctrine2
+- Produto - pacote onde se encontra as regras de negocio para produto
+
 ***
-###Endpoints: 
+#### Endpoints: 
 
 **Produto**:
 
