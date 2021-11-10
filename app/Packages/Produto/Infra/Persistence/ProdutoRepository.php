@@ -35,4 +35,9 @@ class ProdutoRepository extends Repository implements ProdutoRepositoryInterface
         EntityManager::flush();
         return $produto;
     }
+
+    public function getBySku(string $sku): ?Produto
+    {
+        return $this->findOneBy(['sku' => $sku]);
+    }
 }

@@ -30,6 +30,10 @@ class ProdutoFacade
 
     public function create(ProdutoRequestDto $produtoRequestDto): Produto
     {
+        if($this->produtoRepository->getBySku($produtoRequestDto->getSku()) instanceof Produto) {
+            throw new \Exception('Codigo Sku já cadastrado', 1636500056);
+        }
+
         $produto = $this->produtoFactory::create($produtoRequestDto);
         $produto = $this->produtoRepository->create($produto);
         return $produto;
