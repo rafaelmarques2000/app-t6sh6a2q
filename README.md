@@ -3,7 +3,7 @@
 Setup do projeto
 
 #### siga os passos abaixo:
-
+- renomear .env.exemple para .env
 - docker-compose up
 - docker exec -it {nome do container} bash
 - composer install
@@ -14,7 +14,7 @@ Tecnologias Utilizadas
 
 - PHP 7.4
 - Laravel 8.6
-- PhpUnit 9.x(testes Unitários)  
+- PhpUnit 9.5 
 - Postgres 12
 - Docker 20.10.7
 - Docker Compose 20.10.7
