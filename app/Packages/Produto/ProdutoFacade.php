@@ -30,7 +30,7 @@ class ProdutoFacade
 
     public function create(ProdutoRequestDto $produtoRequestDto): Produto
     {
-        if($this->produtoRepository->getBySku($produtoRequestDto->getSku()) instanceof Produto) {
+        if ($this->produtoRepository->getBySku($produtoRequestDto->getSku()) instanceof Produto) {
             throw new \Exception('Codigo Sku já cadastrado', 1636500056);
         }
 
@@ -41,6 +41,10 @@ class ProdutoFacade
 
     public function adicionarProdutoEstoque(Produto $produto, ProdutoEstoqueRequestDto $produtoEstoqueRequestDto): Produto
     {
+        if (!$this->produtoRepository->getBySku($produtoEstoqueRequestDto->getSku()) instanceof Produto) {
+            throw new \Exception('Codigo Sku não encontrado', 1636505134);
+        }
+
         $produto->adicionarProdutoEstoque($produtoEstoqueRequestDto->getQuantidade());
         $this->produtoRepository->update($produto);
         return $produto;
@@ -48,6 +52,10 @@ class ProdutoFacade
 
     public function baixarProdutoNoEstoque(Produto $produto, ProdutoEstoqueRequestDto $produtoEstoqueRequestDto): Produto
     {
+        if (!$this->produtoRepository->getBySku($produtoEstoqueRequestDto->getSku()) instanceof Produto) {
+            throw new \Exception('Codigo Sku não encontrado', 1636505131);
+        }
+
         $produto->baixarProdutoEstoque($produtoEstoqueRequestDto->getQuantidade());
         $this->produtoRepository->update($produto);
         return $produto;
